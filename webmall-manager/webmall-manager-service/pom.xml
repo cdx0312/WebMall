@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>3.4.2-fix</version>
+            <version>5.1.0</version>
         </dependency>
         <!--引入ActiveMQ的jar包-->
         <dependency>

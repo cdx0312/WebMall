@@ -12,4 +12,18 @@
     
     <!--配置包扫描器，扫描所有带@Service注解的类-->
     <context:component-scan base-package="com.cdx.service"/>
+
+    <!--发布Dubbo服务-->
+    <!--提供方应用信息，用于计算依赖-->
+    <dubbo:application name="webMall-manager"/>
+
+    <!--注册中心的地址-->
+    <dubbo:registry protocol="zookeeper" address="123.206.76.76:2181"/>
+
+    <!--用Dubbo协议在20880端口暴露服务-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <!--声明需要暴露的服务接口-->
+    <!--注册商品管理服务-->
+    <dubbo:service interface="com.cdx.service.ItemService" ref="itemServiceImpl" timeout="300000"/>
 </beans>

@@ -108,13 +108,13 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>3.4.2-fix</version>
+            <version>5.1.0</version>
         </dependency>
         <!--添加FastDFS客户端的引用-->
-        <dependency>
-            <groupId>fastdfs_client</groupId>
-            <artifactId>fastdfs_client</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>fastdfs_client</groupId>-->
+            <!--<artifactId>fastdfs_client</artifactId>-->
+        <!--</dependency>-->
         <!--文件上传组件-->
         <dependency>
             <groupId>commons-fileupload</groupId>

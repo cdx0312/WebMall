@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
@@ -33,5 +33,17 @@
         <!--设定文件上传的最大值为5M-->
         <property name="maxUploadSize" value="5242880"/>
     </bean>
+
+    <!--引用Dubbo服务-->
+
+    <!--提供方应用信息，用于计算依赖-->
+    <dubbo:application name="webMall-manager-web"/>
+
+    <!--注册中心的地址-->
+    <dubbo:registry protocol="zookeeper" address="123.206.76.76:2181"/>
+
+    <!--Dubbo引用服务-->
+    <!--引用商品服务-->
+    <dubbo:reference interface="com.cdx.service.ItemService" id="itemService"/>
 
 </beans>
