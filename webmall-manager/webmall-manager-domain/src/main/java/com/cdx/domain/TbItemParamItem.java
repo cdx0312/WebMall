@@ -1,9 +1,8 @@
 package com.cdx.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class TbItemParamItem implements Serializable {
+public class TbItemParamItem {
     private Long id;
 
     private Long itemId;

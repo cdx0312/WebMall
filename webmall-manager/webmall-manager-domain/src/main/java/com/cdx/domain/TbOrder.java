@@ -1,9 +1,8 @@
 package com.cdx.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class TbOrder implements Serializable{
+public class TbOrder {
     private String orderId;
 
     private String payment;

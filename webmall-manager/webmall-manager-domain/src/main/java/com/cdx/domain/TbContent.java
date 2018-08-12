@@ -1,9 +1,8 @@
 package com.cdx.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class TbContent implements Serializable{
+public class TbContent {
     private Long id;
 
     private Long categoryId;

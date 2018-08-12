@@ -1,9 +1,8 @@
 package com.cdx.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class TbItem implements Serializable {
+public class TbItem {
     private Long id;
 
     private String title;
