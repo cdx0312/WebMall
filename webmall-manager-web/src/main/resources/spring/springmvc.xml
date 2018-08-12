@@ -45,5 +45,6 @@
     <!--Dubbo引用服务-->
     <!--引用商品服务-->
     <dubbo:reference interface="com.cdx.service.ItemService" id="itemService"/>
-
+    <!--引用商品分类服务-->
+    <dubbo:reference interface="com.cdx.service.ItemCatService" id="itemCatService"/>
 </beans>
