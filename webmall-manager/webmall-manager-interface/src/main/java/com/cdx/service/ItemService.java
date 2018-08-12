@@ -1,6 +1,7 @@
 package com.cdx.service;
 
 import com.cdx.common.domain.EasyUIDataGridResult;
+import com.cdx.common.domain.WebMallResponse;
 import com.cdx.domain.TbItem;
 
 /**
@@ -21,4 +22,6 @@ public interface ItemService {
      * @return 返回EasyUIDataGridResult给Controller
      */
     EasyUIDataGridResult getItemList(int page, int rows);
+
+    WebMallResponse addItem(TbItem item, String desc);
 }

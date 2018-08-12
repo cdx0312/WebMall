@@ -1,6 +1,7 @@
 package com.cdx.controller;
 
 import com.cdx.common.domain.EasyUIDataGridResult;
+import com.cdx.common.domain.WebMallResponse;
 import com.cdx.domain.TbItem;
 import com.cdx.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,20 @@ public class ItemController {
     @ResponseBody
     public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
         return itemService.getItemList(page, rows);
+    }
+
+    /**
+     * 商品添加功能，表单提交的信息会自动绑定到Item的同名属性中，多余的desc属性将一同从页面传递
+     * 到Controller，调用service层的itemService的addItem方法，分别将商品信息和商品描述信息添加
+     * 到相应的数据库表中
+     * @param item 其中封装了表单提交过来的商品信息
+     * @param desc 商品描述信息，会存到商品描述类的属性中
+     * @return 返回WebMallResponse类，其中封装了三个属性。
+     */
+    @RequestMapping(value = "/item/save", method = RequestMethod.POST)
+    @ResponseBody
+    public WebMallResponse addItem(TbItem item, String desc) {
+        return itemService.addItem(item, desc);
     }
 
 }
