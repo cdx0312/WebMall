@@ -1,5 +1,6 @@
 package com.cdx.service;
 
+import com.cdx.common.domain.EasyUIDataGridResult;
 import com.cdx.domain.TbItem;
 
 /**
@@ -12,4 +13,12 @@ public interface ItemService {
      * @return 返回商品的实体类
      */
     TbItem getItemById(Long itemId);
+
+    /**
+     * 实现商品列表的分页展示
+     * @param page 当前页数
+     * @param rows 每页展示的商品数
+     * @return 返回EasyUIDataGridResult给Controller
+     */
+    EasyUIDataGridResult getItemList(int page, int rows);
 }

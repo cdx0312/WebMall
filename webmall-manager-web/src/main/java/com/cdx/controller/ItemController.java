@@ -1,5 +1,6 @@
 package com.cdx.controller;
 
+import com.cdx.common.domain.EasyUIDataGridResult;
 import com.cdx.domain.TbItem;
 import com.cdx.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,19 @@ public class ItemController {
         TbItem tbItem = itemService.getItemById(itemId);
         return tbItem;
     }
+
+    /**
+     * 分页展示商品信息
+     * @param page 当前页数，参数从Request中通过名称进行绑定
+     * @param rows 每页的行数，参数从Request中通过名称进行绑定
+     * @return 返回EasyUIDataGridResult类转换成JSon字符串的值传回
+     * 其中该类包含两个参数，total表示商品总数，rows表示当前商品的列表
+     * 其名称时根据前段页面来确定。
+     */
+    @RequestMapping("/item/list")
+    @ResponseBody
+    public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
+        return itemService.getItemList(page, rows);
+    }
+
 }
