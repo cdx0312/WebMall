@@ -35,4 +35,5 @@
     <!--Dubbo引用服务-->
     <!--引用内容服务-->
     <dubbo:reference interface="com.cdx.content.service.ContentService" id="contentService"/>
+    <dubbo:reference interface="com.cdx.content.service.ContentCategoryService" id="contentCategoryService"/>
 </beans>
