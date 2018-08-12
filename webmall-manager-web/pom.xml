@@ -26,6 +26,12 @@
             <artifactId>webmall-manager-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--conteng-interface-->
+        <dependency>
+            <groupId>com.cdx</groupId>
+            <artifactId>webmall-content-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
