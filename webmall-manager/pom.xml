@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>webmall-parent</artifactId>
+        <groupId>com.cdx</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../webmall-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>webmall-manager</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>webmall-manager-domain</module>
+        <module>webmall-manager-dao</module>
+        <module>webmall-manager-interface</module>
+        <module>webmall-manager-service</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.cdx</groupId>
+            <artifactId>webMall-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--配置Tomcat-->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/</path>
+                    <port>8082</port>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+</project>
