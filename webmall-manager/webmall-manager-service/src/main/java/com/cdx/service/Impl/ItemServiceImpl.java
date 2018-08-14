@@ -3,15 +3,19 @@ package com.cdx.service.Impl;
 import com.cdx.common.domain.EasyUIDataGridResult;
 import com.cdx.common.domain.WebMallResponse;
 import com.cdx.common.util.IDUtils;
+import com.cdx.common.util.JsonUtils;
 import com.cdx.domain.TbItem;
 import com.cdx.domain.TbItemDesc;
 import com.cdx.domain.TbItemExample;
+import com.cdx.jedis.JedisClient;
 import com.cdx.mapper.TbItemDescMapper;
 import com.cdx.mapper.TbItemMapper;
 import com.cdx.service.ItemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -32,10 +36,49 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private TbItemDescMapper itemDescMapper;
 
+    /**
+     * 注入Jedis客户端
+     */
+    @Autowired
+    private JedisClient jedisClient;
+    @Value("${ITEM_INFO}")
+    private String ITEM_INFO;
 
+    @Value("${ITEM_EXPIRE}")
+    private Integer ITEM_EXPIRE;
+
+
+
+
+    /**
+     * 通过商品主键，查询商品
+     * @param itemId 商品的Id值，对应数据库表中的itemID
+     * @return
+     */
     @Override
     public TbItem getItemById(Long itemId) {
-        return itemMapper.selectByPrimaryKey(itemId);
+        //查询数据库之前先查缓存
+        try {
+            String json = jedisClient.get(ITEM_INFO + ":" + itemId + ":BASE");
+            if (StringUtils.isNotBlank(json)) {
+                //把json数据转换成POJO
+                TbItem tbItem = JsonUtils.jsonToPojo(json, TbItem.class);
+                return tbItem;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //缓存中没有查询数据库
+        TbItem item = itemMapper.selectByPrimaryKey(itemId);
+        //查完之后将查询结果添加到缓存
+        try {
+            //设置过期时间，提高缓存利用率
+            jedisClient.set(ITEM_INFO + ":" + itemId + ":BASE", JsonUtils.objectToJson(item));
+            jedisClient.expire(ITEM_INFO + ":" + itemId + ":BASE",ITEM_EXPIRE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 
     /**
