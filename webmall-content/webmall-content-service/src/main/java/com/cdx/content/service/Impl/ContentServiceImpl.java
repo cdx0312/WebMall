@@ -6,6 +6,7 @@ import com.cdx.common.util.JsonUtils;
 import com.cdx.content.service.ContentService;
 import com.cdx.domain.TbContent;
 import com.cdx.domain.TbContentExample;
+import com.cdx.jedis.JedisClient;
 import com.cdx.mapper.TbContentMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -69,7 +70,7 @@ public class ContentServiceImpl implements ContentService {
     /**
      * 内容添加功能
      * @param content 要添加的内容的实现类
-     * @return 返回TaotaoResult封装的数据
+     * @return 返回result封装的数据
      */
     @Override
     public WebMallResponse addContent(TbContent content) {
@@ -86,7 +87,7 @@ public class ContentServiceImpl implements ContentService {
     /**
      * 内容修改功能
      * @param content 要修改的内容的实现类
-     * @return 返回TaotaoResult封装的数据
+     * @return 返回Result封装的数据
      */
     @Override
     public WebMallResponse editContent(TbContent content) {
@@ -101,7 +102,7 @@ public class ContentServiceImpl implements ContentService {
     /**
      * 内容删除服务功能
      * @param ids 页面接收的字符串，各个id之间用逗号分隔
-     * @return 返回TaotaoResult封装的数据
+     * @return 返回Result封装的数据
      */
     @Override
     public WebMallResponse deleteContentByIds(String ids) {
