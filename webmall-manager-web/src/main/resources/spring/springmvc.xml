@@ -51,4 +51,6 @@
     <dubbo:reference interface="com.cdx.content.service.ContentCategoryService" id="contentCategoryService" />
     <!--引用内容服务-->
     <dubbo:reference interface="com.cdx.content.service.ContentService" id="contentService"/>
+    <!--引用solr服务-->
+    <dubbo:reference interface="com.cdx.search.service.SearchItemService" id="searchItemService"/>
 </beans>
