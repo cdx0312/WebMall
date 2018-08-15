@@ -16,8 +16,15 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +44,13 @@ public class ItemServiceImpl implements ItemService {
     private TbItemDescMapper itemDescMapper;
 
     /**
+     * 注入ActiveMQ的发送模板，发送消息到ActiveMQ服务器
+     */
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+
+    /**
      * 注入Jedis客户端
      */
     @Autowired
@@ -47,8 +61,11 @@ public class ItemServiceImpl implements ItemService {
     @Value("${ITEM_EXPIRE}")
     private Integer ITEM_EXPIRE;
 
-
-
+    /**
+     * 根据名称来注入Destination
+     */
+    @Resource(name = "item-add-topic")
+    private Destination destination;
 
     /**
      * 通过商品主键，查询商品
@@ -131,13 +148,13 @@ public class ItemServiceImpl implements ItemService {
         //向商品描述表插入数据
         itemDescMapper.insert(itemDesc);
         //向ActiveMQ发送商品添加消息
-//        jmsTemplate.send(destination, new MessageCreator() {
-//            @Override
-//            public Message createMessage(Session session) throws JMSException {
-//                //发送商品id
-//                return session.createTextMessage(itemId + "");
-//            }
-//        });
+        jmsTemplate.send(destination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                //发送商品id
+                return session.createTextMessage(itemId + "");
+            }
+        });
         //返回结果
         return WebMallResponse.ok();
     }
