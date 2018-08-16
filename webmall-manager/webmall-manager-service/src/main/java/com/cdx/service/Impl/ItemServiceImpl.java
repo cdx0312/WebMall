@@ -6,6 +6,7 @@ import com.cdx.common.util.IDUtils;
 import com.cdx.common.util.JsonUtils;
 import com.cdx.domain.TbItem;
 import com.cdx.domain.TbItemDesc;
+import com.cdx.domain.TbItemDescExample;
 import com.cdx.domain.TbItemExample;
 import com.cdx.jedis.JedisClient;
 import com.cdx.mapper.TbItemDescMapper;
@@ -157,5 +158,40 @@ public class ItemServiceImpl implements ItemService {
         });
         //返回结果
         return WebMallResponse.ok();
+    }
+
+    /**
+     * 根据商品Id来查询商品描述信息
+     * @param itemId 商品ID
+     * @return 返回商品描述的实体类
+     */
+    @Override
+    public TbItemDesc getItemDescById(long itemId) {
+        //查询数据库之前先查缓存
+        try {
+            String json = jedisClient.get(ITEM_INFO + ":" + itemId + ":DESC");
+            if (StringUtils.isNotBlank(json)) {
+                //把json数据转换成POJO
+                TbItemDesc tbItemDesc = JsonUtils.jsonToPojo(json, TbItemDesc.class);
+                return tbItemDesc;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //缓存中没有查询数据库
+        TbItemDescExample example = new TbItemDescExample();
+        TbItemDescExample.Criteria criteria = example.createCriteria();
+        criteria.andItemIdEqualTo(itemId);
+        List<TbItemDesc> tbItemDescs = itemDescMapper.selectByExample(example);
+        TbItemDesc itemDesc = tbItemDescs.get(0);
+        //查完之后将查询结果添加到缓存
+        try {
+            //设置过期时间，提高缓存利用率
+            jedisClient.set(ITEM_INFO + ":" + itemId + ":DESC", JsonUtils.objectToJson(itemDesc));
+            jedisClient.expire(ITEM_INFO + ":" + itemId + ":DESC",ITEM_EXPIRE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return itemDesc;
     }
 }

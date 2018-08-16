@@ -3,6 +3,7 @@ package com.cdx.service;
 import com.cdx.common.domain.EasyUIDataGridResult;
 import com.cdx.common.domain.WebMallResponse;
 import com.cdx.domain.TbItem;
+import com.cdx.domain.TbItemDesc;
 
 /**
  * 商品管理服务的接口
@@ -24,4 +25,6 @@ public interface ItemService {
     EasyUIDataGridResult getItemList(int page, int rows);
 
     WebMallResponse addItem(TbItem item, String desc);
+
+    TbItemDesc getItemDescById(long itemId);
 }
