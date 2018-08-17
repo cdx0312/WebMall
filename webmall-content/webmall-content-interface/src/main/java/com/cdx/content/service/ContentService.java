@@ -22,21 +22,21 @@ public interface ContentService {
     /**
      * 内容添加功能
      * @param content 要添加的内容的实现类
-     * @return 返回TaotaoResult封装的数据
+     * @return 返回封装的数据
      */
     WebMallResponse addContent(TbContent content);
 
     /**
      * 内容修改功能
      * @param content 要修改的内容的实现类
-     * @return 返回TaotaoResult封装的数据
+     * @return 返回封装的数据
      */
     WebMallResponse editContent(TbContent content);
 
     /**
      * 根据内容id,批量删除内容
      * @param ids 页面接收的字符串，各个id之间用", "分隔
-     * @return 返回TaotaoResult封装的数据
+     * @return 返回封装的数据
      */
     WebMallResponse deleteContentByIds(String ids);
 

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ItemController {
 
     /**
-     * 通过Dubbo获取taotao-manager工程中的商品管理服务，itemService
+     * 通过Dubbo获取manager工程中的商品管理服务，itemService
      * 将其注入到Controller中
      */
     @Autowired

@@ -58,7 +58,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
      * 添加内容类别，将当前节点的ID作为新接待点的parentId
      * @param parentId 新增节点的父ID
      * @param name 新增节点的名字
-     * @return 返回TaotaoResult封装的类
+     * @return 返回封装的类
      */
     @Override
     public WebMallResponse addContentCategory(Long parentId, String name) {
@@ -89,7 +89,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
      * 修改内容类别名称
      * @param id 要修改的节点的Id
      * @param name 修改后节点的名字
-     * @return 返回TaotaoResult封装好的实体类
+     * @return 返回封装好的实体类
      */
     @Override
     public WebMallResponse updateContentCategory(Long id, String name) {

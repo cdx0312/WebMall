@@ -132,9 +132,9 @@ public class CartController {
         //1、判断用户是否登陆，如果未登录，购物车展示数据为Cookie中保存的，如果已经登录，去redis中去取数据展示
         String token = CookieUtils.getCookieValue(request, TOKEN_KEY);
         //根据token从数据库中获取用户的信息
-        WebMallResponse taotaoResult = userService.getUserByToken(token);
-        //如果token不存在或者没有取到用户，则TaotaoResult的status为400，此时说明未登录，则返回Cookie中的购物车数据
-        if (taotaoResult.getStatus() != 200) {
+        WebMallResponse result = userService.getUserByToken(token);
+        //如果token不存在或者没有取到用户，则Result的status为400，此时说明未登录，则返回Cookie中的购物车数据
+        if (result.getStatus() != 200) {
             List<TbItem> cartItemList = getCartItemList(request);
             request.setAttribute("cartList", cartItemList);
             return "cart";

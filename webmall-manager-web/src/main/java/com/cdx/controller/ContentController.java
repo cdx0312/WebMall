@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ContentController {
     /**
-     * 通过Dubbo获取taotao-content中的内容服务并将其注入到Controller中
+     * 通过Dubbo获取content中的内容服务并将其注入到Controller中
      */
     @Autowired
     private ContentService contentService;

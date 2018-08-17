@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class ItemCatController {
     /**
-     * 通过Dubbo获取taotao-manager的商品分类管理服务，
+     * 通过Dubbo获取manager的商品分类管理服务，
      * 并将其注入到Controller中
      */
     @Autowired
